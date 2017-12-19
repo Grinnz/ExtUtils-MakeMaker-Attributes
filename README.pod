@@ -1,0 +1,122 @@
+=pod
+
+=head1 NAME
+
+ExtUtils::MakeMaker::Attributes - Determine when ExtUtils::MakeMaker attributes
+are available
+
+=head1 SYNOPSIS
+
+  use ExtUtils::MakeMaker::Attributes ':all';
+  
+  my @eumm_available = eumm_version_supported_attributes(ExtUtils::MakeMaker->VERSION);
+  my @core_available = perl_version_supported_attributes($]);
+  
+  unless (eumm_version_supports_attribute(ExtUtils::MakeMaker->VERSION, 'TEST_REQUIRES')) {
+    my $fallback = eumm_attribute_fallback('TEST_REQUIRES');
+  }
+  
+  my $required_eumm = eumm_attribute_requires_version('TEST_REQUIRES');
+
+=head1 DESCRIPTION
+
+This module provides an API to determine what attributes are available to a
+particular version of L<ExtUtils::MakeMaker>, and conversely, what version of
+L<ExtUtils::MakeMaker> is required for a particular attribute. See
+L<ExtUtils::MakeMaker/"Using Attributes and Parameters"> for more details on
+the available attributes.
+
+=head1 FUNCTIONS
+
+All functions are exported on demand, and can be exported individually or via
+the C<:all> tag.
+
+=head2 known_eumm_attributes
+
+  my @attributes = known_eumm_attributes;
+
+Returns a list of attributes known to be accepted by the current version of
+L<ExtUtils::MakeMaker>.
+
+=head2 is_known_eumm_attribute
+
+  my $boolean = is_known_eumm_attribute($attribute);
+
+Returns a boolean whether the attribute is known to be accepted by the current
+version of L<ExtUtils::MakeMaker>.
+
+=head2 eumm_attribute_requires_version
+
+  my $version = eumm_attribute_requires_version($attribute);
+
+Returns the minimum version of L<ExtUtils::MakeMaker> that accepts the
+attribute.
+
+=head2 eumm_attribute_fallback
+
+  my $hashref = eumm_attribute_fallback($attribute);
+
+Returns a hashref if the attribute has an associated fallback method, or
+C<undef> if the attribute should only be deleted for versions where it is not
+accepted. The hashref contains a C<method> and possibly additional keys related
+to the fallback method. Currently it may return these methods:
+
+=over 2
+
+=item merge_prereqs
+
+The key's contents (as a hashref of prerequisites) should be merged into the
+C<merge_target> (also returned in the hashref), ideally using
+L<CPAN::Meta::Requirements/"add_requirements">.
+
+=back
+
+=head2 eumm_version_supports_attribute
+
+  my $boolean = eumm_version_supports_attribute($attribute, $eumm_version);
+
+Returns a boolean whether the L<ExtUtils::MakeMaker> supports the attribute at
+the specified version.
+
+=head2 perl_version_supports_attribute
+
+  my $boolean = perl_version_supports_attribute($attribute, $perl_version);
+
+Returns a boolean whether the version of L<ExtUtils::MakeMaker> shipped in the
+specified version of Perl supports the attribute.
+
+=head2 eumm_version_supported_attributes
+
+  my @attributes = eumm_version_supported_attributes($eumm_version);
+
+Returns a list of all attributes supported by the specified version of
+L<ExtUtils::MakeMaker>.
+
+=head2 perl_version_supported_attributes
+
+  my @attributes = perl_version_supported_attributes($perl_version);
+
+Returns a list of all attributes supported by the version of
+L<ExtUtils::MakeMaker> shipped in the specified version of Perl.
+
+=head1 BUGS
+
+Report any issues on the public bugtracker.
+
+=head1 AUTHOR
+
+Dan Book <dbook@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2017 by Dan Book.
+
+This is free software, licensed under:
+
+  The Artistic License 2.0 (GPL Compatible)
+
+=head1 SEE ALSO
+
+L<ExtUtils::MakeMaker>
+
+=cut
