@@ -285,10 +285,12 @@ attribute.
 
   my $hashref = eumm_attribute_fallback($attribute);
 
-Returns a hashref if the attribute has an associated fallback method, or
-C<undef> if the attribute should only be deleted for versions where it is not
-accepted. The hashref contains a C<method> and possibly additional keys related
-to the fallback method. Currently it may return these methods:
+In cases where the active version of L<ExtUtils::MakeMaker> does not support an
+attribute, the attribute should be deleted from the options passed to
+C<WriteMakefile>. However, some attributes may still be useful in other ways,
+as indicated by this function. If the attribute has an associated fallback
+method, it returns a hashref containing a C<method> and possibly other related
+keys. Otherwise, it returns C<undef>. Currently it may return these methods:
 
 =over 2
 
