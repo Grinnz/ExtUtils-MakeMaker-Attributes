@@ -264,14 +264,14 @@ the C<:all> tag.
 
   my @attributes = known_eumm_attributes;
 
-Returns a list of attributes known to be accepted by the current version of
+Returns a list of attributes known to be accepted by the latest version of
 L<ExtUtils::MakeMaker>.
 
 =head2 is_known_eumm_attribute
 
   my $boolean = is_known_eumm_attribute($attribute);
 
-Returns a boolean whether the attribute is known to be accepted by the current
+Returns a boolean whether the attribute is known to be accepted by the latest
 version of L<ExtUtils::MakeMaker>.
 
 =head2 eumm_attribute_requires_version
