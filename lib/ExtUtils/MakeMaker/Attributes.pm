@@ -297,7 +297,7 @@ keys. Otherwise, it returns C<undef>. Currently it may return these methods:
 =item merge_prereqs
 
 The key's contents (as a hashref of prerequisites) should be merged into the
-C<merge_target> (also returned in the hashref), ideally using
+C<merge_target> (returned in the fallback hashref), ideally using
 L<CPAN::Meta::Requirements/"add_requirements">.
 
 =back
