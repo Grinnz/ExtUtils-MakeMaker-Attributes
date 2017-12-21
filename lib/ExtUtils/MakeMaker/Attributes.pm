@@ -7,7 +7,7 @@ use Exporter 'import';
 use Module::CoreList;
 use version;
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 my @exports = qw(
   known_eumm_attributes is_known_eumm_attribute
