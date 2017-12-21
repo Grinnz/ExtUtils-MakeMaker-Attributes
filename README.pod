@@ -12,11 +12,15 @@ are available
   my @eumm_available = eumm_version_supported_attributes(ExtUtils::MakeMaker->VERSION);
   my @core_available = perl_version_supported_attributes($]);
   
-  unless (eumm_version_supports_attribute(ExtUtils::MakeMaker->VERSION, 'TEST_REQUIRES')) {
-    my $fallback = eumm_attribute_fallback('TEST_REQUIRES');
+  unless (perl_version_supports_attribute('v5.10.1', 'TEST_REQUIRES')) {
+    ...
   }
   
+  my $fallback = eumm_attribute_fallback('TEST_REQUIRES');
   my $required_eumm = eumm_attribute_requires_version('TEST_REQUIRES');
+  unless (eval { ExtUtils::MakeMaker->VERSION($required_eumm); 1 }) {
+    ...
+  }
 
 =head1 DESCRIPTION
 
