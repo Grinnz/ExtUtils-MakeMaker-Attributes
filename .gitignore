@@ -16,4 +16,4 @@ nytprof.out
 *.o
 *.bs
 /_eumm/
-/ExtUtils-MakeMaker-Features-*
+/ExtUtils-MakeMaker-Attributes-*
